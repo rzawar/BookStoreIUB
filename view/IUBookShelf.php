@@ -85,7 +85,7 @@
           <div class="container">
             <div class="carousel-caption">
               <h1>Buy Some Books</h1>
-              <h2><p>Hey, wanna buy books cheap? Search here. Search for book you need and we could find the ppropriate seller for you.</p></h2>
+              <h2><p>Hey, wanna buy books cheap? Search here. Search for book you need and we could find the appropriate seller for you.</p></h2>
               <p><a class="btn btn-lg btn-success" href="#" role="button">Let's Buys</a></p>
             </div>
           </div>
