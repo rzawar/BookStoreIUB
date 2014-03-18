@@ -39,6 +39,8 @@
           <input type="checkbox" value="remember-me"> Remember me
         </label>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+		<h5 class="text-muted">New to IUBookshelf ?</h5>
+		<button class="btn btn-lg btn-success btn-block" type="submit">Create Account</button>
       </form>
 
     </div> <!-- /container -->
