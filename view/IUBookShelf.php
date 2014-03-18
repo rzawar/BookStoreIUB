@@ -55,9 +55,9 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">What would you like to do <b class="caret"></b></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account Settings <b class="caret"></b></a>
                   <ul class="dropdown-menu">
-                    <li><a href="#"><h3>Buy some Books cheap</h3></a></li>
+                    <li><a href="#"><h3>Sign in or sign out</h3></a></li>
                     <li class="divider"></li>
                     <li><a href="#"><h3>Sell some Books</h3></a></li>
                   </ul>
@@ -81,21 +81,21 @@
       </ol>
       <div class="carousel-inner">
         <div class="item active">
-          <img data-src="holder.js/900x500/auto/#777:#7a7a7a/text:Buy Sell" alt="Buy books">
+          <img data-src="holder.js/900x500/auto/#777:#7a7a7a/text:Buy Some Books" alt="Buy books">
           <div class="container">
             <div class="carousel-caption">
               <h1>Buy Some Books</h1>
-              <h3><p>Hey, wanna buy books cheap? Search here. Search for book you need and we could find the ppropriate seller for you.</p></h3>
+              <h2><p>Hey, wanna buy books cheap? Search here. Search for book you need and we could find the ppropriate seller for you.</p></h2>
               <p><a class="btn btn-lg btn-success" href="#" role="button">Let's Buys</a></p>
             </div>
           </div>
         </div>
         <div class="item">
-          <img data-src="holder.js/900x500/auto/#777:#7a7a7a/text:Sell books" alt="Sell books">
+          <img data-src="holder.js/900x500/auto/#777:#7a7a7a/text:Sell Some Books" alt="Sell books">
           <div class="container">
             <div class="carousel-caption">
-              <h1>Sell some books</h1>
-              <h3><p>Hey, wanna get rid of old books? help needful. Sell books here at rate you quote. Necessary buyer may contact you.</p></h3>
+              <h1>Sell Some Books</h1>
+              <h2><p>Hey, wanna get rid of old books? help needful. Sell books here at rate you quote. Necessary buyer may contact you.</p></h2>
               <p><a class="btn btn-lg btn-danger" href="#" role="button">Let's Sell</a></p>
             </div>
           </div>
