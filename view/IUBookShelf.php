@@ -13,6 +13,9 @@
 
     <!-- Bootstrap core CSS -->
     <link href="../bootstrap-3.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+	
+	<!-- Custom styles for this template -->
+    <link href="../bootstrap-3.1.1/docs/examples/signin/signin.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -41,7 +44,7 @@
         <div class="navbar navbar-inverse navbar-static-top" role="navigation">
           <div class="container">
             <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -54,14 +57,25 @@
                 <li class="active"><a href="#">UserName</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account Settings <b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="#"><h3>Sign in or sign out</h3></a></li>
-                    <li class="divider"></li>
-                    <li><a href="#"><h3>Sell some Books</h3></a></li>
-                  </ul>
+                
+				<!-- Login form dropdown starts -->
+				<li class="dropdown">
+					<a href="#" data-toggle="dropdown" class="dropdown-toggle" style="min-width: 300px">Sign in<b class="caret"></b></a>
+						<div class="dropdown-menu" id="signin-dropdown" style="min-width: 300px; opacity: 0.9;">
+							<form class="form-signin" role="form">
+								<input type="email" class="form-control" placeholder="Email address" required autofocus>
+								<input type="password" class="form-control" placeholder="Password" required>
+								<label class="checkbox">
+									<input type="checkbox" value="remember-me"> Remember me
+								</label>
+								<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+							<h5 class="text-muted">New to IUBookshelf ?</h5>
+							<button class="btn btn-lg btn-success btn-block" type="submit">Create Account</button>
+							</form>
+						</div>
                 </li>
+				<!-- Login form dropdown ends -->
+				
               </ul>
             </div>
           </div>
@@ -191,6 +205,11 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+	<script type="text/javascript">
+		$(document).ready(function(){
+		$(".dropdown-toggle").dropdown();
+		});  
+	</script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="../bootstrap-3.1.1/dist/js/bootstrap.min.js"></script>
     <script src="../bootstrap-3.1.1/docs/assets/js/docs.min.js"></script>
