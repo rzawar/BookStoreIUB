@@ -1,4 +1,10 @@
+<?php
+session_start();
+if(!isset($_SESSION['username'])){
+	header("Location: login.php"); 
+}
 
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -50,30 +56,26 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#">IU Book Shelf</a>
+              <a class="navbar-brand" href="IUBookShelf.php">IU Book Shelf</a>
             </div>
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="#">UserName</a></li>
+                <li class="active"><a href="#"><?php echo $_SESSION['username'];?></a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
                 
+				<?php
+				if(!isset($_SESSION)){?>
 				<!-- Login form dropdown starts -->
-				<li class="dropdown">
-					<a href="#" data-toggle="dropdown" class="dropdown-toggle" style="min-width: 300px">Sign in<b class="caret"></b></a>
-						<div class="dropdown-menu" id="signin-dropdown" style="min-width: 300px; opacity: 0.9;">
-							<form class="form-signin" role="form">
-								<input type="email" class="form-control" placeholder="Email address" required autofocus>
-								<input type="password" class="form-control" placeholder="Password" required>
-								<label class="checkbox">
-									<input type="checkbox" value="remember-me"> Remember me
-								</label>
-								<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-							<h5 class="text-muted">New to IUBookshelf ?</h5>
-							<button class="btn btn-lg btn-success btn-block" type="submit">Create Account</button>
-							</form>
-						</div>
-                </li>
+				<li><a href="Login.php">Sign In</a></li>
+				<?php
+				}else {?>
+				<li><a href="Logout.php">Sign Out</a></li>
+				<?php
+				}
+				?>
+				<li>
+				</li>
 				<!-- Login form dropdown ends -->
 				
               </ul>
@@ -83,8 +85,6 @@
 
       </div>
     </div>
-
-
     <!-- Carousel
     ================================================== -->
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -100,7 +100,7 @@
             <div class="carousel-caption">
               <h1>Buy Some Books</h1>
               <h2><p>Hey, wanna buy books cheap? Search here. Search for book you need and we could find the appropriate seller for you.</p></h2>
-              <p><a class="btn btn-lg btn-success" href="#" role="button">Let's Buys</a></p>
+              <p><a class="btn btn-lg btn-success" href="#" role="button"name="buy" id ="save">Let's Buys</a></p>
             </div>
           </div>
         </div>
@@ -209,6 +209,15 @@
 		$(document).ready(function(){
 		$(".dropdown-toggle").dropdown();
 		});  
+		function raiseLoginError(){
+			alert("Wrong username or password, Please try again!!!");
+		}
+		
+		$(document).ready(function() {
+			$("#buy").click(function() {
+				alert("gere iasjfbka");
+    });
+});
 	</script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="../bootstrap-3.1.1/dist/js/bootstrap.min.js"></script>

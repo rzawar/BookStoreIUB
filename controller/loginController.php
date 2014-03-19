@@ -1,7 +1,8 @@
 <?php
 
-if($_POST){
-	echo "Ok"
+if(isset($_POST)){
+	echo "Rohit";
 }
+echo 'Rohit';
 
 ?>
