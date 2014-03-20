@@ -4,6 +4,14 @@ if(!isset($_SESSION['username']))
 	header("Location: login.php"); 
 else
 	$user = $_SESSION['username'];
+	
+if(isset($_POST['search'])){
+	include '../model/Book.php';
+	$query = $_POST['query'];
+	$book = new Book();
+	$result = $book->getResult($query);
+	
+}
 ?>
 <html lang="en">
   <head>
@@ -86,65 +94,91 @@ else
       <div class="row" id ="search">
         <div class="col-lg-4 col-centered">
           <h4>Search for books</h4>
+		  <form class = "form-search" method = "post" action="BuyBooks.php">
 		  <div class="input-group">
 				<input type="text" class="form-control" placeholder="Search for books here ..." id="query" name="query" value=""></input>
 				<div class="input-group-btn">
-					<button type="button" class="btn btn-success" name = "search"><span class="glyphicon glyphicon-search"></span></button>
+					<button type="submit" class="btn btn-success" name = "search"><span class="glyphicon glyphicon-search"></span></button>
 				</div>
 		  </div>
+		  </form>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
 	   <div class="container marketing">
        <div class="row">
-        <div class="col-lg-4">
-          <h2>Book1</h2>
-          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+	   <?php
+	   if(isset($result)){
+	   while ($row = mysql_fetch_assoc($result)) {?>
+        <div class="col-lg-3">
+          <h2><?php echo $row['title'];?></h2>
+          <h4><p><?php echo $row['author'];?></p></h4>
+		  <p><a class="open-displayBook btn btn-default" data-target= "#viewBook" role="button" data-toggle = "modal" data-id = "<?php echo $row['bookid'] ?>" >View Book Details&raquo;</a></p>
         </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <h2>Book2</h2>
-          <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <h2>Book3</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
+        <?php
+		}
+		}
+		?>
       </div><!-- /.row -->
 	  </div>
+	  
+	<div class="modal fade" id="viewBook" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <label  name="book_title" id="book_title">	</label>
+        </div>
+        <div class="modal-body">
+           <label>Author    :</label><label  name="author" id="author"></label><hr>
+		   <label>publisher :</label><label  name="publisher" id="publisher"></label><hr>
+		   <label>Edition   :</label><label  name="edition" id="edition"></label><hr>
+		   <label>Sold by   :</label><label  name="sold_by" id="sold_by"></label><hr>
+		   <label>Price	    :</label><label  name="price" id="price"></label><hr>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div>
+	  
 	</script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="../bootstrap-3.1.1/dist/js/bootstrap.min.js"></script>
     <script src="../bootstrap-3.1.1/docs/assets/js/docs.min.js"></script>
 	<script>
-	$(document).ready(function() {
-		$("#search").click(function() {
-		var searchQuery =  $("#query").val();
-		//alert(searchQuery);
-		$.ajax({                                      
-			url: 'GetBooks.php',                  //the script to call to get data          
-			data: {query:searchQuery},                        //you can insert url argumnets here to pass to api.php
-                                       //for example "id=5&parent=6"
-			dataType: 'json',                //data format      
-			success: function(data)          //on recieve of reply
-			{
-				var id = data[0];              //get id
-				var vname = data[1];
-                alert("here in success "+id + " "+vname); 				//get name
-        //--------------------------------------------------------------------
-        // 3) Update html content
-        //--------------------------------------------------------------------
-			$('#output').html("<b>id: </b>"+id+"<b> name: </b>"+vname); //Set output element html
-			//recommend reading up on jquery selectors they are awesome 
-        // http://api.jquery.com/category/selectors/
+	$(document).on("click", ".open-displayBook", function () {
+		var bookid = $(this).data('id');
+		//alert(bookid);
+		$.ajax({
+        url: 'GetBooks.php',
+        data: {id:bookid},
+		success: function(data){
+			//alert(data);
+			var row =  $.parseJSON(data);
+			$(".modal-header #book_title").text( row[2]);
+			$(".modal-body #author").text( row[4]);
+			$(".modal-body #publisher").text( row[6]);
+			$(".modal-body #edition").text( row[3]);
+			$(".modal-body #price").text( row[7]);
+			$(".modal-body #sold_by").text( row[9]);
+			
+			//relocation.reload(true);
+						// Load the content in to the page.
 			},
-			error: function(data){
-			 alert("in error");
-			}
+		error:function(data){
+			alert("in error"+data);
+		}
 		});
-});
-});
+     //$(".modal-body #noteId").val( myNoteContents );
+	 //$(".modal-header #notetitle").val( myNoteTitle )
+	 
+     // As pointed out in comments, 
+     // it is superfluous to have to manually call the modal.
+      //$('#addBookDialog').modal('show');
+	  
+	});
 	</script>
   </body>
 </html>
