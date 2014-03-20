@@ -1,4 +1,29 @@
+<?php
+if(isset($_SESSION['username']))
+	header("Location: IUBookShelf.php"); 
+include '../model/Login.php';
 
+	if(isset($_POST['submit'])){
+	$login = new Login($_POST['username'] ,$_POST['password']);
+	try{
+	$var =$login->getData();
+	}
+	catch (Exception $e){
+	$var = 0;
+	$fail = 1;
+	
+	}
+	if($var ){
+		$user = $_POST['username'];
+		session_start();
+		$_SESSION['username'] = $user;
+		echo "here in if";
+		header("Location: IUBookShelf.php"); 
+	}
+	else
+	echo "should be here";
+	}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -31,23 +56,34 @@
 
     <div class="container">
 
-      <form class="form-signin" role="form">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="email" class="form-control" placeholder="Email address" required autofocus>
-        <input type="password" class="form-control" placeholder="Password" required>
+      <form class="form-signin" action = "login.php" method = "post" role="form">
+        <h3 class="form-signin-heading">Sign in to IU Book Shelf</h3>
+        <input type="text" class="form-control" placeholder="User name" name = "username" required autofocus>
+        <input type="password" class="form-control" placeholder="Password" name="password" required>
         <label class="checkbox">
           <input type="checkbox" value="remember-me"> Remember me
         </label>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name = "submit" >Sign in</button>
 		<h5 class="text-muted">New to IUBookshelf ?</h5>
-		<button class="btn btn-lg btn-success btn-block" type="submit">Create Account</button>
+		<button class="btn btn-lg btn-success btn-block" type="submit" name = "submit" value ="signin">Create Account</button>
       </form>
 
+	 
     </div> <!-- /container -->
+	<hr class="featurette-divider">
 
+      <!-- /END THE FEATURETTES -->
+
+
+      <!-- FOOTER -->
+      <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+      </footer>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+	
   </body>
 </html>
