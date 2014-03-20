@@ -192,37 +192,28 @@ include '../model/Login.php';
 	<script>
 		$(document).ready(function() {
 			$("#doRegister").click(function() {
-			//alert("here button clicked");
-			$.ajax({
-			type : "GET",
-			url: 'process.php',
-			//data: 'title='+notetitle+'contents='+notecontents,
-			//data:{title:"notetitle", contents:"notecontents"},
-			success: function(data){
-				alert("success!!!"+data);
-				location.reload(true);
-				// Load the content in to the page.
+				
+				var username = $("#user_name").val();
+				var fname = $("#first_name").val();
+				var lname = $("#last_name").val();
+				var email = $("#usr_email").val();
+				var password = $("#pwd").val();
+				var address = $("#address").val();
+				var phoneno = $("#phoneno").val();
+				var dob = $("#dob").val();
+				$.ajax({
+					url: 'process.php',
+					data:{username:username, fname:fname, lname:lname, email:email, password:password, address:address, phoneno:phoneno, dob:dob},
+				success: function(data){
+					alert("User succesfully Registered ,Please log in");
+					location.reload(true);							// Load the content in to the page.
 				},
-			error: function(jqXHR, exception) {
-            if (jqXHR.status === 0) {
-                alert('Not connect.\n Verify Network.');
-            } else if (jqXHR.status == 404) {
-                alert('Requested page not found. [404]');
-            } else if (jqXHR.status == 500) {
-                alert('Internal Server Error [500].');
-            } else if (exception === 'parsererror') {
-                alert('Requested JSON parse failed.');
-            } else if (exception === 'timeout') {
-                alert('Time out error.');
-            } else if (exception === 'abort') {
-                alert('Ajax request aborted.');
-            } else {
-                alert('Uncaught Error.\n' + jqXHR.responseText);
-            }
-        }
+				error: function(data) {
+					alert("in error"+data);
+				}
+			});
 		});
-    });
-});
+		});
 	</script>
   </body>
 </html>

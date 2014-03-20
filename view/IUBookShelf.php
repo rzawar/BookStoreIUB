@@ -56,6 +56,7 @@ if(!isset($_SESSION['username'])){
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
+
               <a class="navbar-brand" href="IUBookShelf.php">IU Book Shelf</a>
             </div>
             <div class="navbar-collapse collapse">
@@ -66,7 +67,6 @@ if(!isset($_SESSION['username'])){
                 
 				<?php
 				if(!isset($_SESSION)){?>
-				<!-- Login form dropdown starts -->
 				<li><a href="Login.php">Sign In</a></li>
 				<?php
 				}else {?>
@@ -76,6 +76,7 @@ if(!isset($_SESSION['username'])){
 				?>
 				<li>
 				</li>
+
 				<!-- Login form dropdown ends -->
 				
               </ul>
@@ -85,6 +86,7 @@ if(!isset($_SESSION['username'])){
 
       </div>
     </div>
+
     <!-- Carousel
     ================================================== -->
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -222,5 +224,38 @@ if(!isset($_SESSION['username'])){
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="../bootstrap-3.1.1/dist/js/bootstrap.min.js"></script>
     <script src="../bootstrap-3.1.1/docs/assets/js/docs.min.js"></script>
+	<script src="../bootstrap-3.1.1/js/modal.js"></script>
+	
+	<!-- script below submits Registration form contents to process.php and shows the processed results in the 'registerModal' div -->
+	<script>
+		/*
+		$(function() {
+			$("#doRegister").click(function() {
+			var username = $("#user_name").val();
+			var fname = $("#first_name").val();
+			var lname = $("#last_name").val();
+			var email = $("#usr_email").val();
+			var password = $("#pwd").val();
+			var address = $("#address").val();
+			var phoneno = $("#phoneno").val();
+			var dob = $("#dob").val();
+			$.ajax({
+				url: 'process.php',
+				data: "data1=" + username,
+				//cache: false,
+				//data:{user:username, fnam:fname},//, lname:lname, email:email, password:password, address:address, phoneno:phoneno, dob:dob},
+				success: function(data){
+					alert("in success "+data);
+					location.reload(true);							// Load the content in to the page.
+				},
+				error: function(data) {
+					alert("in error"+data);
+				}
+			});
+		});
+		}); */
+		
+		
+	</script>
   </body>
 </html>
