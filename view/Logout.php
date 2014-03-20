@@ -5,5 +5,5 @@ session_start();
 //$login->close();
 session_unset();
 session_destroy();
-header("Location: IUBookShelf.php"); 
+header("Location: login.php"); 
 ?>

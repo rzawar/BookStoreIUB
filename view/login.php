@@ -2,26 +2,40 @@
 if(isset($_SESSION['username']))
 	header("Location: IUBookShelf.php"); 
 include '../model/Login.php';
+include '../model/User.php';
 
 	if(isset($_POST['submit'])){
-	$login = new Login($_POST['username'] ,$_POST['password']);
-	try{
-	$var =$login->getData();
+		$login = new Login($_POST['username'] ,$_POST['password']);
+		try{
+			$var =$login->getData();
+		}
+		catch (Exception $e){
+			$var = 0;
+			$fail = 1;
+		}
+		if($var ){
+			$user = $_POST['username'];
+			session_start();
+			$_SESSION['username'] = $user;
+			echo "here in if";
+			header("Location: IUBookShelf.php"); 
+		}
+		else
+			echo "should be here";
 	}
-	catch (Exception $e){
-	$var = 0;
-	$fail = 1;
 	
-	}
-	if($var ){
-		$user = $_POST['username'];
-		session_start();
-		$_SESSION['username'] = $user;
-		echo "here in if";
-		header("Location: IUBookShelf.php"); 
-	}
-	else
-	echo "should be here";
+	if(isset($_POST['doRegister'])) {
+ 		$user = new User($_POST['user_name'], $_POST['first_name'], $_POST['last_name'], $_POST['usr_email'], $_POST['pwd'], $_POST['address'], $_POST['phoneno'], $_POST['dob']);
+		$returnVal = $user->insertUser();
+		// echo $returnVal;
+		
+		/*
+		if($returnVal != 1) {
+			echo "something went wrong during insertion of user data";
+		} else {
+			echo "Welcome, new user!";
+		}
+		*/
 	}
 ?>
 <!DOCTYPE html>
@@ -84,10 +98,11 @@ include '../model/Login.php';
 						
 						<!-- New user to fill out basic profile information -->
 						
+						<form class="form-horizontal" action="login.php" method="post" name="regForm" id="regForm" >
 							<div id="poslabel" class="control-group">
 								<label class="control-label" for="inputUserName">User Name</label>
 								<div class="controls">
-									<input name="user_name" type="text" id="user_name" class="required username" minlength="5" >
+									<input name="user_name" type="text" id="user_name" required minlength="5" >
 									<input name="btnAvailable" type="button" id="btnAvailable" value="Check Availability" class="btn btn-warning">
 								<br>
 								<span style="color:red; font: bold 10px verdana; " id="checkid"  ></span> 
@@ -97,21 +112,21 @@ include '../model/Login.php';
 							<div id="poslabel" class="control-group">
                                  <label class="control-label" for="inputFirstName">First Name </label>
                                  <div class="controls">
-									<input name="first_name" type="text" id="first_name" size="40" class="required">
+									<input name="first_name" type="text" id="first_name" size="40" required>
                                  </div>
                             </div>
 							
 							<div id="poslabel" class="control-group">
                                  <label class="control-label" for="inputLastName">Last Name </label>
                                  <div class="controls">
-									<input name="last_name" type="text" id="last_name" size="40" class="required">
+									<input name="last_name" type="text" id="last_name" size="40" required>
                                  </div>
                             </div>
 
                             <div id="poslabel" class="control-group">
                                  <label class="control-label" for="inputEmail">Email</label>
                                 <div class="controls">
-									<input name="usr_email" type="text" id="usr_email" class="required email"> 
+									<input name="usr_email" type="text" id="usr_email" required> 
 									<span class="example">** Please enter a valid email address</span>
 								</div>
                             </div>
@@ -119,7 +134,7 @@ include '../model/Login.php';
                             <div  id="poslabel"  class="control-group">
                                 <label class="control-label" for="inputPassword">Password</label>
                                 <div class="controls">
-									<input name="pwd" type="password" class="required password" minlength="5" id="pwd"> 
+									<input name="pwd" type="password" required minlength="5" id="pwd"> 
 									<span class="example">** Minimum 5 characters</span>
 								</div>
                             </div>
@@ -127,7 +142,7 @@ include '../model/Login.php';
                             <div id="poslabel"  class="control-group">
                                 <label class="control-label" for="inputPassword">Re-enter Password</label>
                                 <div class="controls">
-									<input name="pwd2"  id="pwd2" class="required password" type="password" minlength="5" equalto="#pwd">
+									<input name="pwd2"  id="pwd2" required type="password" minlength="5" equalto="#pwd">
 								</div>
                             </div>
 							
@@ -142,14 +157,14 @@ include '../model/Login.php';
 							<div id="poslabel" class="control-group">
                                  <label class="control-label" for="phoneno">Phone no.</label>
                                  <div class="controls">
-									<input name="phoneno" type="text" id="phoneno" size="20" class="required">
+									<input name="phoneno" type="text" id="phoneno" size="20" required>
                                  </div>
                             </div>
 							
 							<div id="poslabel" class="control-group">
                                  <label class="control-label" for="dob">Date of Birth</label>
                                  <div class="controls">
-									<input name="dob" type="text" id="dob" size="10" class="required">
+									<input name="dob" type="text" id="dob" size="10" required>
                                  </div>
                             </div>
                                
@@ -159,6 +174,7 @@ include '../model/Login.php';
                                 <button type="reset" class="btn">Clear</button>
                                 </div>
                             </div>
+						</form>	
 					</div>
 				</div>
 				
@@ -191,7 +207,7 @@ include '../model/Login.php';
 	<script src="../bootstrap-3.1.1/js/modal.js"></script>
 	<script>
 		$(document).ready(function() {
-			$("#doRegister").click(function() {
+			$("#changed").click(function() {
 				
 				var username = $("#user_name").val();
 				var fname = $("#first_name").val();
@@ -205,7 +221,7 @@ include '../model/Login.php';
 					url: 'process.php',
 					data:{username:username, fname:fname, lname:lname, email:email, password:password, address:address, phoneno:phoneno, dob:dob},
 				success: function(data){
-					alert("User succesfully Registered ,Please log in");
+					alert(data);
 					location.reload(true);							// Load the content in to the page.
 				},
 				error: function(data) {
