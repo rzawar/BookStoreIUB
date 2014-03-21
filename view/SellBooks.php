@@ -12,8 +12,14 @@
 		$publisher = $_POST['book_publisher'];
 		$price = $_POST['book_price'];
 		$year = $_POST['publish_year'];
+		$user = $_SESSION['username'];
 		
-		include '';
+		include '../model/Book.php';
+		$book = new Book();
+		$book->setBookData($ISBN, $title, $edition, $author, $publisher, $price, $year, $user);
+		$return = $book->insertBook();
+		
+		
 	}
 		
 ?>

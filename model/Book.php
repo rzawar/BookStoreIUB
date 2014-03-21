@@ -18,19 +18,20 @@ class Book{
 	function __construct(){
 	
 	}
-	function setBookData($bid,$isbn,$title,$edition,$author,$copies,$publisher,$price,$year,$user,$type){
 	
-	$this->bid =$bid;
+	function setBookData($isbn,$title,$edition,$author,$publisher,$price,$year,$user){
+	
+	//$this->bid =$bid;
 	$this->isbn =$isbn;
 	$this->title = $title;
 	$this->edition = $edition;
 	$this->author =$author;
-	$this->copies = $copies;
+	//$this->copies = $copies;
 	$this->publisher =   $publisher;
 	$this->price =  $price;
 	$this->year = $year;
 	$this->user =$user;
-	$this->type = $type;
+	//$this->type = $type;
 	
 	}
 	function connectDB(){
@@ -40,7 +41,8 @@ class Book{
 	function insertBook(){
 		$this->connectDB();
 	
-		$query = "";
+		$query = "INSERT INTO `books`(isbn, title, edition, author, publisher, price, year, username, type) VALUES ('$this->isbn', 'this->title', 'this->edition', 
+		'this->author', 'this->publisher', 'this->price', 'this->year', 'this->user', \"sell\");";
 		return mysql_query($query) or die("Insertion Failed:" . mysql_error());
 	}
 	function getResult($query){
