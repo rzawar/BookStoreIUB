@@ -41,8 +41,8 @@ class Book{
 	function insertBook(){
 		$this->connectDB();
 	
-		$query = "INSERT INTO `books`(isbn, title, edition, author, publisher, price, year, username, type) VALUES ('$this->isbn', 'this->title', 'this->edition', 
-		'this->author', 'this->publisher', 'this->price', 'this->year', 'this->user', \"sell\");";
+		$query = "INSERT INTO `books`(isbn, title, edition, author, publisher, price, year, username, type) VALUES ('$this->isbn', '$this->title', '$this->edition', 
+		'$this->author', '$this->publisher', '$this->price', '$this->year', '$this->user', \"sell\");";
 		return mysql_query($query) or die("Insertion Failed:" . mysql_error());
 	}
 	function getResult($query){
