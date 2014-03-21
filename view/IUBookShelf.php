@@ -1,8 +1,11 @@
 <?php
-	session_start();
-	if(!isset($_SESSION['username'])){
-		header("Location: login.php"); 
-	}
+
+session_start();
+if(isset($_SESSION['username']))
+	$user =  $_SESSION['username'];
+else 
+$user = "Guest";
+
 ?>
 
 <!DOCTYPE html>
@@ -61,12 +64,12 @@
             </div>
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="#"><?php echo $_SESSION['username'];?></a></li>
+                <li class="active"><a href="#"><?php echo $user;?></a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
                 
 				<?php
-				if(!isset($_SESSION)){?>
+				if($user == "Guest"){?>
 				<li><a href="Login.php">Sign In</a></li>
 				<?php
 				}else {?>
@@ -102,7 +105,7 @@
             <div class="carousel-caption">
               <h1>Buy Some Books</h1>
               <h2><p>Hey, wanna buy books cheap? Search here. Search for book you need and we could find the appropriate seller for you.</p></h2>
-              <p><a class="btn btn-lg btn-success" href="#" role="button"name="buy" id ="save">Let's Buys</a></p>
+              <p><a class="btn btn-lg btn-success" href="BuyBooks.php" role="button"name="buy" id ="save">Let's Buys</a></p>
             </div>
           </div>
         </div>
