@@ -130,14 +130,13 @@ if(isset($_POST['search'])){
         </div>
         <div class="modal-body">
            <label>Author    :</label><label  name="author" id="author"></label><hr>
-		   <label>publisher :</label><label  name="publisher" id="publisher"></label><hr>
+		   <label>Publisher :</label><label  name="publisher" id="publisher"></label><hr>
 		   <label>Edition   :</label><label  name="edition" id="edition"></label><hr>
 		   <label>Sold by   :</label><label  name="sold_by" id="sold_by"></label><hr>
 		   <label>Price	    :</label><label  name="price" id="price"></label><hr>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
