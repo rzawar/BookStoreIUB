@@ -1,10 +1,10 @@
 <?php
-session_start();
-if(!isset($_SESSION['username'])){
-	header("Location: login.php"); 
-}
-
+	session_start();
+	if(!isset($_SESSION['username'])){
+		header("Location: login.php"); 
+	}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -112,7 +112,7 @@ if(!isset($_SESSION['username'])){
             <div class="carousel-caption">
               <h1>Sell Some Books</h1>
               <h2><p>Hey, wanna get rid of old books? help needful. Sell books here at rate you quote. Necessary buyer may contact you.</p></h2>
-              <p><a class="btn btn-lg btn-danger" href="#" role="button">Let's Sell</a></p>
+              <p><a class="btn btn-lg btn-danger" href="SellBooks.php" role="button">Let's Sell</a></p>
             </div>
           </div>
         </div>

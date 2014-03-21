@@ -57,18 +57,22 @@ include '../model/Login.php';
     <div class="container">
 
       <form class="form-signin" action = "login.php" method = "post" role="form">
-        <h3 class="form-signin-heading">Sign in to IU Book Shelf</h3>
+        <h3 class="form-signin-heading">Sign in to IUBookShelf</h3>
         <input type="text" class="form-control" placeholder="User name" name = "username" required autofocus>
         <input type="password" class="form-control" placeholder="Password" name="password" required>
         <label class="checkbox">
           <input type="checkbox" value="remember-me"> Remember me
         </label>
         <button class="btn btn-lg btn-primary btn-block" type="submit" name = "submit" >Sign in</button>
-		<h5 class="text-muted">New to IUBookshelf ?</h5>
-		<button class="btn btn-lg btn-success btn-block" data-toggle="modal" data-target="#registerModal">Create Account</button>
+		<!-- <button class="btn btn-lg btn-success btn-block" data-toggle="modal" data-target="#registerModal">Create Account</button> -->
       </form>
-	<button class="btn btn-lg btn-success btn-block" data-toggle="modal" data-target="#registerModal">Create Account</button>
-	 
+	
+	<!-- wrote div below outside the <form> to avoid 'please fill this field' message -->
+	<div style="margin-left:420px;">
+		<h4 class="text-muted">New to IUBookshelf ?</h4>
+		<button class="btn btn-lg btn-success" data-toggle="modal" data-target="#registerModal" style="min-width:300px;">Create Account</button>
+	</div>
+	
     </div> <!-- /container -->
 	<!-- the registration modal that pops up -->
 	<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">

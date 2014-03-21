@@ -15,16 +15,17 @@
 			//get data
 		}
 	
-		function setData($username,$password){
-			
+		function setData($username,$password){	
 			$this->username = $username;
 			$this->password = $password;
 		}
+		
 		function connectToDB(){
 			include '../model/database.php';
 			$vars = '../include/vars.php';
 			$this->db = new Database($vars);		
 		}
+		
 		function getData(){
 			
 			$getUserInfo = "select * from `users` where `username` ='$this->username' and password ='$this->password'";
@@ -35,9 +36,11 @@
 			else
 				throw new Exception("Username or password is invalid , Please try again");
 		}
+		
 		function close(){
 			$this->db->close();
 		}
+		
 	}
 
 ?>
