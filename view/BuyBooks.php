@@ -4,13 +4,15 @@ if(!isset($_SESSION['username']))
 	header("Location: login.php"); 
 else
 	$user = $_SESSION['username'];
-	
+$num =0 ;	
 if(isset($_POST['search'])){
 	include '../model/Book.php';
 	$query = $_POST['query'];
 	$book = new Book();
 	$result = $book->getResult($query);
-	$row = mysql_fetch_assoc($result);
+
+	$num = mysql_num_rows($result);
+
 }
 ?>
 <html lang="en">
@@ -102,15 +104,20 @@ if(isset($_POST['search'])){
 				</div>
 		  </div>
 		  </form>
+		  <?php
+		  if($num >0) {
+			echo "<h4 style=\"color: purple;\">Click on the book's title to get its best deals</h4>";
+		  }
+		  ?>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
 	   <div class="container marketing">
        <div class="row">
 	   <?php
-	   if(isset($result)){
+	   if($num>0){
 	   while ($row = mysql_fetch_assoc($result)) {?>
         <div class="col-lg-3">
-          <h2><?php echo $row['title'];?></h2>
+          <h2><a target="_blank" href="BookDeals.php?data1=<?php echo $row['bookid']; ?>&data2=<?php echo $row['isbn']; ?>" style="color: purple"><?php echo $row['title'];?></a></h2>
           <h4><p><?php echo $row['author'];?></p></h4>
 		  <p><a class="open-displayBook btn btn-success" data-target= "#viewBook" role="button" data-toggle = "modal" data-id = "<?php echo $row['bookid'] ?>" >View Book Details&raquo;</a></p>
         </div><!-- /.col-lg-4 -->
@@ -142,7 +149,6 @@ if(isset($_POST['search'])){
     </div><!-- /.modal-dialog -->
   </div>
 	  
-	</script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="../bootstrap-3.1.1/dist/js/bootstrap.min.js"></script>
     <script src="../bootstrap-3.1.1/docs/assets/js/docs.min.js"></script>

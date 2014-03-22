@@ -16,7 +16,7 @@ class Book{
 	
 	
 	function __construct(){
-	
+		$this->connectDB();
 	}
 	
 	function setBookData($isbn,$title,$edition,$author,$publisher,$price,$year,$user){
@@ -39,18 +39,32 @@ class Book{
 		$db = new Database('../include/vars.php');
 	}
 	function insertBook(){
-		$this->connectDB();
-	
+			
 		$query = "INSERT INTO `books`(isbn, title, edition, author, publisher, price, year, username, type) VALUES ('$this->isbn', '$this->title', '$this->edition', 
 		'$this->author', '$this->publisher', '$this->price', '$this->year', '$this->user', \"sell\");";
 		return mysql_query($query) or die("Insertion Failed:" . mysql_error());
 	}
 	function getResult($query){
-		$this->connectDB();
+
 		$result = mysql_query("SELECT * FROM `books` where title like '%$query%' and type = \"sell\" ");          //query   
 		return $result;	
+		
 	}
 
+	function getBookDetails($bookid) {
+				
+		$query = "SELECT * FROM `books` WHERE bookid = '$bookid';";
+		$var = mysql_query($query) or die("Book could not be fetched. Error: ".mysql_error());
+		return $var;
+	}
+	
+	function getSellers($isbn) {
+				
+		$query = "SELECT username, price FROM `books` WHERE isbn = '$isbn'";
+		$var = mysql_query($query) or die("Sellers could not be fetched. Error: ".mysql_error());
+		return $var;
+	}
+	
 }
 
 ?>
