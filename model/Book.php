@@ -47,7 +47,7 @@ class Book{
 	}
 	function getResult($query){
 		$this->connectDB();
-		$result = mysql_query("SELECT * FROM `books` where title = '$query' and type = \"sell\" ");          //query   
+		$result = mysql_query("SELECT * FROM `books` where title like '%$query%' and type = \"sell\" ");          //query   
 		return $result;	
 	}
 

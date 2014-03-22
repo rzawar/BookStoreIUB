@@ -10,7 +10,7 @@ if(isset($_POST['search'])){
 	$query = $_POST['query'];
 	$book = new Book();
 	$result = $book->getResult($query);
-	
+	$row = mysql_fetch_assoc($result);
 }
 ?>
 <html lang="en">
@@ -112,7 +112,7 @@ if(isset($_POST['search'])){
         <div class="col-lg-3">
           <h2><?php echo $row['title'];?></h2>
           <h4><p><?php echo $row['author'];?></p></h4>
-		  <p><a class="open-displayBook btn btn-default" data-target= "#viewBook" role="button" data-toggle = "modal" data-id = "<?php echo $row['bookid'] ?>" >View Book Details&raquo;</a></p>
+		  <p><a class="open-displayBook btn btn-success" data-target= "#viewBook" role="button" data-toggle = "modal" data-id = "<?php echo $row['bookid'] ?>" >View Book Details&raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <?php
 		}
