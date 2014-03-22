@@ -4,6 +4,8 @@
 		header("Location: IUBookShelf.php");
 	}
 	
+	$check = true;
+	
 	if(isset($_POST['uploadQuote'])) {
 		$title = $_POST['book_title'];
 		$author = $_POST['book_author'];
@@ -19,7 +21,7 @@
 		$book->setBookData($ISBN, $title, $edition, $author, $publisher, $price, $year, $user);
 		$return = $book->insertBook();
 		
-		
+		$check = false;
 	}
 		
 ?>
@@ -88,7 +90,9 @@
 						</div>
 					</div>
 				</div>
-
+					
+				<?php
+				if($check) { ?>
 				<div class="hero-unit">
 					<h1>Sell your books here!</h1>
 					
@@ -156,7 +160,16 @@
                             </div>
 							</form>
 		</div>
-				
+				<?php 
+				} else { ?>
+					<div class="col-lg-10">
+						<h2>Your book has been successfully added !</h2>
+						<a class="btn btn-success" href="SellBooks.php" >Add another book</a>
+						<a class="btn btn-warning" href="IUBookShelf.php" >Go to Home Page</a>
+					</div>
+				<?php 
+				}
+				?>
 			</div>	
 		</div>
 		
