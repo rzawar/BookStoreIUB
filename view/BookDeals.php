@@ -81,7 +81,7 @@
             </div>
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="#"><?php echo $user;?></a></li>
+                <li class="active"><a href="User.php"><span class="glyphicon glyphicon-user"></span>    <?php echo $user;?></a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
 				<li><a href="Logout.php">Sign Out</a></li>
@@ -93,7 +93,8 @@
         </div>
 		
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-4">
+			<h3>Book details </h3>
 				<ul class="list-group">
 					<li class="list-group-item list-group-item-info">Book Title</li>
 					<li class="list-group-item" style="font-weight: bold"><?php echo $row['title'];?></li>
@@ -115,17 +116,23 @@
 					<li class="list-group-item" style="font-weight: bold"><?php echo $row['username'];?></li>
 				</ul>
 			</div>
-			<div class="col-md-7">
+			<div class = "col-md-2">
+			</div>
+			<div class="col-md-5">
+				<h3>Other deals for the similar Books</h3>
 				<table class="table table-hover">
 					<tr>
 						<th>Seller</th>
 						<th>Price</th>
+						<th>View</th>
 					</tr>
 					<?php
 						while($row = mysql_fetch_assoc($sellerRows)) { ?>
 					<tr>
 						<td><?php echo $row['username']; ?></td>
 						<td><?php echo $row['price']; ?></td>
+						<td><a class="request" data-target= "#" role="button" data-toggle = "modal">View</a></td>
+
 					</tr><?php } ?>
 				</table>	
 			</div>

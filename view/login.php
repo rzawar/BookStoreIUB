@@ -3,7 +3,6 @@ if(isset($_SESSION['username']))
 	header("Location: IUBookShelf.php"); 
 include '../model/Login.php';
 include '../model/User.php';
-
 	if(isset($_POST['submit'])){
 		$login = new Login($_POST['username'] ,$_POST['password']);
 		try{
@@ -13,7 +12,7 @@ include '../model/User.php';
 			$var = 0;
 			$fail = 1;
 		}
-		if($var ){
+		if($var){
 			$user = $_POST['username'];
 			session_start();
 			$_SESSION['username'] = $user;
@@ -21,11 +20,15 @@ include '../model/User.php';
 			header("Location: IUBookShelf.php"); 
 		}
 		else
-			echo "should be here";
+			$check = true;
+	}
+	else{
+		$check = false;
 	}
 	
 	if(isset($_POST['doRegister'])) {
- 		$user = new User($_POST['user_name'], $_POST['first_name'], $_POST['last_name'], $_POST['usr_email'], $_POST['pwd'], $_POST['address'], $_POST['phoneno'], $_POST['dob']);
+ 		$user = new User();
+		$user->setObject($_POST['user_name'], $_POST['first_name'], $_POST['last_name'], $_POST['usr_email'], $_POST['pwd'], $_POST['address'], $_POST['phoneno'], $_POST['dob']);
 		$returnVal = $user->insertUser();
 		// echo $returnVal;
 		
@@ -36,6 +39,9 @@ include '../model/User.php';
 			echo "Welcome, new user!";
 		}
 		*/
+	}
+	else{
+		$returnVal = 0;
 	}
 ?>
 <!DOCTYPE html>
@@ -65,11 +71,28 @@ include '../model/User.php';
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
-
+  <style>
+  #img{
+	margin-left:410px;
+	margin-top:5px;
+}
+  </style>
   <body>
 
     <div class="container">
-
+	<?php if($check) { ?>
+	<div class="alert alert-danger alert-dismissable">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		<strong>Inccorect username or password!!!</strong> Please try again.
+	</div>
+	<?php } 
+	if($returnVal == 1) { ?>
+	<div class="alert alert-success alert-dismissable">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		<strong>User registered successfully!!!</strong> Please Log in.
+	</div>
+	<?php } ?>
+	<img src = "../img/iuhomelogo.png" id ="img"/>
       <form class="form-signin" action = "login.php" method = "post" role="form">
         <h3 class="form-signin-heading">Sign in to IUBookShelf</h3>
         <input type="text" class="form-control" placeholder="User name" name = "username" required autofocus>

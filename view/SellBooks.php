@@ -1,8 +1,9 @@
 <?php
 	session_start();
-	if(!isset($_SESSION['username'])) {
-		header("Location: IUBookShelf.php");
-	}
+	if(isset($_SESSION['username']))
+		$user =  $_SESSION['username'];
+	else 
+		$user = "Guest";
 	
 	$check = true;
 	
@@ -53,10 +54,15 @@
 		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
 	</head>
-	
+	<style>
+	.navbar-nav > li{
+	margin-left:30px;
+	margin-right:30px;
+	}
+	</style>
 	<body>
 	
-		
+		<div class="container marketing">
 			<div class="container">
 				<div class="navbar navbar-inverse navbar-static-top" role="navigation">
 					<div class="container">
@@ -73,7 +79,7 @@
 						
 						<div class="navbar-collapse collapse">
 							<ul class="nav navbar-nav">
-								<li class="active"><a href="#"><?php echo $_SESSION['username'];?></a></li>
+								<li class="active"><a href="User.php"><span class="glyphicon glyphicon-user"></span>    <?php echo $user;?></a></li>
 								<li><a href="#about">About</a></li>
 								<li><a href="#contact">Contact</a></li>
 								
@@ -155,7 +161,7 @@
 							<div id="poslabel"  class="control-group">
 								<div class="controls"><br>
                                 <button type="submit" class="btn btn-success" name="uploadQuote" type="submit" id="uploadQuote">Submit Book Info</button>
-                                &nbsp;&nbsp;<button type="reset" class="btn">Clear</button>
+                                &nbsp;&nbsp;<button type="reset" class="btn btn-warning">Clear</button>
                                 </div>
                             </div>
 							</form>
@@ -171,6 +177,11 @@
 				}
 				?>
 			</div>	
+			<footer>
+				<p class="pull-right"><a href="#">Back to top</a></p>
+				<p>&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+			</footer>
+	
 		</div>
 		
 		<!-- FOOTER -->

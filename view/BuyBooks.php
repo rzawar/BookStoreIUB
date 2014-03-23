@@ -73,7 +73,7 @@ if(isset($_POST['search'])){
             </div>
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="#"><?php echo $user;?></a></li>
+                <li class="active"><a href="User.php"><span class="glyphicon glyphicon-user"></span>    <?php echo $user;?></a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
 				<li><a href="Logout.php">Sign Out</a></li>
@@ -148,7 +148,11 @@ if(isset($_POST['search'])){
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div>
-	  
+   <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+      </footer>
+</div>  
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="../bootstrap-3.1.1/dist/js/bootstrap.min.js"></script>
     <script src="../bootstrap-3.1.1/docs/assets/js/docs.min.js"></script>
